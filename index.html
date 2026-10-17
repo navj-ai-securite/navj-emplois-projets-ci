@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parcours Projet CI</title>
+<style>
+:root{--bg:#f6f3ea;--card:#fff;--tx:#14201a;--mu:#5d6d63;--bd:#ddd8c8;--or:#F77F00;--vt:#009E60;--in:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#07120d;--card:#102019;--tx:#f4f1e8;--mu:#9db3a6;--bd:#26402f;--in:#0d1f17}}
+*{box-sizing:border-box}
+body{margin:auto;max-width:560px;padding:12px 12px 90px;background:var(--bg);color:var(--tx);font-family:system-ui,sans-serif;line-height:1.45}
+h1{font-size:21px;margin:0}h2{font-size:17px;margin:0 0 8px;border-left:4px solid var(--or);padding-left:8px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-top:12px}
+.m{color:var(--mu);font-size:13px}
+.hd{background:linear-gradient(135deg,var(--or),var(--vt));color:#fff;border-radius:16px;padding:16px}
+button,.btn{display:block;width:100%;margin-top:10px;padding:13px;border:0;border-radius:12px;font:inherit;font-weight:700;background:var(--vt);color:#fff;text-align:center;text-decoration:none;cursor:pointer}
+button.g{background:var(--card);color:var(--tx);border:1px solid var(--bd)}
+button.o2,.btn.o2{background:var(--or)}
+input,select,textarea{width:100%;padding:12px;margin-top:8px;border-radius:10px;border:1px solid var(--bd);background:var(--in);color:var(--tx);font:inherit;font-size:16px}
+.q{border-top:1px solid var(--bd);padding:10px 0}.q b{display:block;font-size:14px;margin-bottom:6px}
+.o{display:flex;gap:6px}.o label{flex:1;text-align:center;border:1px solid var(--bd);border-radius:10px;padding:8px 2px;font-size:13px;cursor:pointer}
+.o input{display:none;width:auto}.o input:checked+span{font-weight:800;color:var(--vt)}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--vt)}
+.ck{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:14px}.ck input{width:20px;height:20px;margin:0;flex:none}
+.warn{background:rgba(247,127,0,.13);border:1px solid var(--or);border-radius:10px;padding:10px;font-size:13px;margin-top:10px}
+.ok{background:rgba(0,158,96,.13);border:1px solid var(--vt);border-radius:10px;padding:10px;font-size:13px;margin-top:10px}
+.sec{display:none}.sec.on{display:block}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;overflow-x:auto;background:var(--card);border-top:2px solid var(--or);max-width:560px;margin:auto}
+nav button{flex:0 0 auto;min-width:78px;margin:0;border-radius:0;background:none;color:var(--mu);font-size:11px;padding:10px 4px}
+nav button.on{color:var(--or);font-weight:800}
+.r{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid var(--bd);font-size:14px}
+details{border-top:1px solid var(--bd);padding:8px 0}summary{font-weight:700;cursor:pointer}details p{margin:6px 0;font-size:14px}
+.px{font-size:30px;font-weight:800;color:var(--or)}
+button.sel{outline:3px solid var(--or)}.nv{display:none!important}.l2{display:flex;gap:8px}.l2 button{margin-top:10px}
+#toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:#000;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;opacity:0;transition:opacity .25s;pointer-events:none;text-align:center;max-width:90%}#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="hd"><h1>🚀 Parcours Projet CI</h1><div style="font-size:14px;margin-top:4px">Crée ton projet ou trouve un emploi, étape par étape. Gratuit pour commencer.</div></div>
+<div class="l2"><button id="mP">🚀 Je crée mon projet</button><button id="mE" class="g">💼 Je cherche un emploi</button></div>
+
+<section class="sec on" id="t-acc"><div class="c"><h2>Diagnostic de ton projet</h2><p class="m">10 questions, 2 minutes. Réponds honnêtement : c'est pour toi.</p><div id="qs"></div><button id="dg">Voir mon résultat</button><div id="res"></div></div></section>
+
+<section class="sec" id="t-par"><div class="c"><h2>Mon parcours</h2><div id="pg" class="m"></div><div class="bar"><i id="pb" style="width:0"></i></div></div><div id="steps"></div></section>
+
+<section class="sec" id="t-aid"><div class="c"><h2>Aides et financements</h2>
+<p class="m">Points de départ à vérifier toi-même auprès de chaque organisme. Aucune aide n'est garantie et les conditions changent.</p>
+<div class="r"><span><b>Agence Emploi Jeunes (AEJ)</b><br><span class="m">Financement et accompagnement des jeunes entrepreneurs. Le ministère a annoncé 6,75 milliards FCFA pour 2026.</span></span></div>
+<div class="r"><span><b>CEPICI</b><br><span class="m">Formalisation : immatriculation au RCCM.</span></span></div>
+<div class="r"><span><b>AEJ et CDC-CI Capital</b><br><span class="m">Programme d'appui aux start-up (accord de février 2026) : étudiant-entrepreneur, amorçage en capital.</span></span></div>
+<div class="r"><span><b>Microfinance et banques</b><br><span class="m">Cités par un guide 2026 : Advans CI, UNACOOPEC-CI, Baobab, NSIA, BICICI. Compare les conditions avant de t'engager.</span></span></div>
+<div class="warn">Ne paie jamais pour « débloquer » un financement. Vérifie toute offre auprès de l'organisme officiel.</div></div></section>
+
+<section class="sec" id="t-out"><div class="c"><h2>Prix, marge et seuil de rentabilité</h2>
+<input id="px" type="number" inputmode="decimal" placeholder="Prix de vente d'une unité (FCFA)"><input id="cu" type="number" inputmode="decimal" placeholder="Coût d'une unité (FCFA)"><input id="fx" type="number" inputmode="decimal" placeholder="Charges fixes par mois (FCFA)">
+<button id="calc">Calculer</button><div id="cr"></div><p class="m">Estimation simple : teste avec de vrais clients.</p></div></section>
+
+<section class="sec" id="t-arn"><div class="c"><h2>🚩 Alerte arnaques</h2><p class="m">Méfie-toi si on te propose :</p>
+<div class="ck">• De payer des frais pour obtenir un financement ou un emploi.</div><div class="ck">• Un financement « garanti » ou « sans condition ».</div><div class="ck">• Une pression pour décider vite.</div><div class="ck">• De payer sur un compte personnel, sans reçu.</div><div class="ck">• Aucun responsable ni adresse que tu peux retrouver.</div><div class="ck">• De payer pour t'inscrire à une offre d'emploi ou passer un entretien (l'AEJ indique que ses services sont gratuits).</div><div class="ck">• Un emploi « garanti », surtout à l'étranger, contre une avance d'argent.</div>
+<div class="warn">Avant de payer ou de donner tes pièces : vérifie l'organisme auprès d'un guichet officiel, parles-en à une personne de confiance, et garde les preuves.</div></div></section>
+
+<section class="sec" id="t-for"><div class="c"><h2>🎓 Formations (Premium)</h2><p class="m">Méthodes générales à adapter à ton projet. Ce ne sont pas des conseils juridiques ou financiers personnalisés.</p><div id="fl"></div></div></section>
+
+<section class="sec" id="t-dos"><div class="c"><h2>📄 Mon dossier de projet (Premium)</h2><p class="m">Rempli une fois, enregistré sur ton téléphone. Copie-le ou imprime-le.</p><div id="df"></div><button id="dcp">📋 Copier mon dossier</button><button class="g" id="dim">🖨 Imprimer ou enregistrer en PDF</button></div></section>
+
+<section class="sec" id="t-sui"><div class="c"><h2>📈 Suivi hebdomadaire (Premium)</h2>
+<input id="sv" type="number" inputmode="decimal" placeholder="Ventes de la semaine (FCFA)"><input id="sd" type="number" inputmode="decimal" placeholder="Dépenses de la semaine (FCFA)"><input id="sl" placeholder="Ce que j'ai appris / mon objectif de la semaine prochaine">
+<button id="ss">Enregistrer la semaine</button><div id="sh"></div></div></section>
+
+<section class="sec" id="t-emp"><div class="c"><h2>💼 Où chercher un emploi ou un stage</h2>
+<p class="m">Point de départ : l'Agence Emploi Jeunes (AEJ). Vérifie toujours sur son site officiel et aux guichets : les offres et conditions changent.</p>
+<div class="r"><span><b>Inscription gratuite</b><br><span class="m">Sur le site de l'AEJ, bouton « Espace Jeunes ». Pour postuler en ligne, ton profil doit être mis à jour. Selon l'AEJ, tous ses services et programmes sont gratuits.</span></span></div>
+<div class="r"><span><b>Inscription en agence (carte AEJ)</b><br><span class="m">Va dans l'agence la plus proche avec 2 copies de ton CV et la fiche d'inscription en ligne imprimée.</span></span></div>
+<div class="r"><span><b>Emploi Direct</b><br><span class="m">Mise en relation avec des entreprises partenaires (CDI, CDD…). Pour les 18 à 40 ans, niveau BEPC minimum, avec inscription préalable. Pièces : CNI ou passeport, fiche identifiant, CV, lettre de motivation.</span></span></div>
+<div class="r"><span><b>Stages</b><br><span class="m">Stages de qualification et de validation de diplôme, publiés sur le site de l'AEJ.</span></span></div>
+<a class="btn g" href="https://agenceemploijeunes.ci" target="_blank" rel="noopener">Ouvrir le site de l'AEJ</a></div>
+<div class="c"><h2>Ma préparation</h2><div id="ec"></div></div></section>
+
+<section class="sec" id="t-cv"><div class="c"><h2>📝 Mon CV (Premium)</h2><p class="m">Rempli une fois, enregistré sur ton téléphone. Un CV clair tient sur une page.</p><div id="cvf"></div><button id="cvg">Créer mon CV</button><textarea id="cvo" rows="10" placeholder="Ton CV apparaît ici"></textarea><button class="g" id="cvc">📋 Copier</button><button class="g" id="cvp">🖨 Imprimer ou enregistrer en PDF</button></div>
+<div class="c"><h2>✉️ Ma lettre de motivation</h2><p class="m">Modèle à adapter : relis-le et personnalise-le avant d'envoyer.</p><div id="lf"></div><button id="lg">Créer ma lettre</button><textarea id="lo" rows="10" placeholder="Ta lettre apparaît ici"></textarea><button class="g" id="lc">📋 Copier</button></div></section>
+
+<section class="sec" id="t-can"><div class="c"><h2>📌 Mes candidatures (Premium)</h2>
+<input id="ce" placeholder="Entreprise ou organisme"><input id="cp" placeholder="Poste visé">
+<button id="ca2">Ajouter la candidature</button><div id="cl"></div></div>
+<div class="c"><h2>🎤 Préparer l'entretien</h2><p class="m">Prépare une réponse honnête et précise à chaque question.</p><div id="qe"></div><textarea id="qn" rows="4" placeholder="Mes notes et mes réponses"></textarea></div></section>
+
+<section class="sec" id="t-prm"><div class="c"><h2>⭐ Premium mensuel</h2>
+<div class="px">1 000 FCFA <span class="m" style="font-size:14px">/ mois</span></div>
+<div id="etat"></div>
+<p class="m">Comprend : formations, dossier de projet, suivi hebdomadaire, CV et lettre, suivi des candidatures, préparation d'entretien. L'accès dure 31 jours à partir de l'activation de ton code. Pas de renouvellement automatique : tu repaies chaque mois pour un nouveau code. Aucune promesse de financement ni de revenus.</p>
+<a class="btn o2" id="pay" target="_blank" rel="noopener">1. Payer 1 000 FCFA avec Wave</a>
+<input id="jn" placeholder="2. Ton nom complet" autocomplete="off"><input id="jt" placeholder="ID de transaction Wave (T_...)" autocomplete="off" autocapitalize="characters">
+<button id="jg">Prévenir par WhatsApp que j'ai payé</button>
+<p class="m">Ce bouton ne confirme pas le paiement : il prévient seulement l'équipe, qui vérifie avant de t'envoyer ton code.</p>
+<input id="cd" placeholder="3. Colle ici ton code Premium" autocomplete="off"><button id="ca">Activer Premium</button>
+<a class="btn g" id="inv" target="_blank" rel="noopener">📤 Inviter un ami</a></div></section>
+
+<nav><button class="on" data-t="acc" data-g="p">🧭<br>Diagnostic</button><button data-t="par" data-g="p">🗺️<br>Parcours</button><button data-t="aid" data-g="p">🏛️<br>Aides</button><button data-t="out" data-g="p">🧮<br>Outils</button><button data-t="for" data-p="1" data-g="p">🎓<br>Formations</button><button data-t="dos" data-p="1" data-g="p">📄<br>Dossier</button><button data-t="sui" data-p="1" data-g="p">📈<br>Suivi</button><button data-t="emp" data-g="e">💼<br>Emploi</button><button data-t="cv" data-p="1" data-g="e">📝<br>CV et lettre</button><button data-t="can" data-p="1" data-g="e">📌<br>Candidatures</button><button data-t="arn">🚩<br>Arnaques</button><button data-t="prm">⭐<br>Premium</button></nav>
+<div id="toast" role="status"></div>
+<script src="abo.js"></script>
+<script>
+/* ===== RÉGLAGES ===== */
+const CFG={pay:"https://pay.wave.com/m/M_ci_BsVtsF_0PH8q/c/ci/?amount=1000",wa:"2250564939858",jours:31,grace:5};
+/* ==================== */
+const $=id=>document.getElementById(id);
+const lire=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const ecrire=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const toast=m=>{const t=$("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),3000)};
+const fmt=x=>Number(x).toLocaleString("fr-FR");
+
+/* ---- Abonnement mensuel ---- */
+const LOTS=window.PP_LOTS||{};
+const H=s=>{let a=0xdeadbeef,b=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}a=Math.imul(a^(a>>>16),2246822507);a^=Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507);b^=Math.imul(a^(a>>>13),3266489909);return(4294967296*(2097151&b)+(a>>>0)).toString(36)};
+const norm=s=>String(s||"").trim().toUpperCase().replace(/\s+/g,"");
+const lot=c=>{const h=H(norm(c));for(const m in LOTS)if(LOTS[m].includes(h))return m;return null};
+const fenetre=m=>{const p=m.split("-").map(Number);return Date.now()<new Date(p[0],p[1],CFG.grace+1).getTime()};
+const abo=()=>lire("pp_abo",null);
+const finAbo=a=>a.start+CFG.jours*864e5;
+const actif=()=>{const a=abo();return !!(a&&lot(a.code)&&Date.now()<finAbo(a))};
+function etat(){
+  const a=abo(),box=$("etat");
+  if(a&&lot(a.code)&&Date.now()<finAbo(a)){const j=Math.max(1,Math.ceil((finAbo(a)-Date.now())/864e5));box.innerHTML=`<div class="ok">✅ Premium actif : encore ${j} jour(s). Pour continuer ensuite, paie à nouveau et demande un nouveau code.</div>`}
+  else if(a&&lot(a.code))box.innerHTML='<div class="warn">Ton mois Premium est terminé. Paie à nouveau pour recevoir un nouveau code.</div>';
+  else box.innerHTML="";
+  document.querySelectorAll("nav [data-p]").forEach(b=>{b.dataset.l=actif()?"":"1";b.innerHTML=b.innerHTML.replace(" 🔒","")+(actif()?"":" 🔒")});
+}
+$("pay").href=CFG.pay;
+$("ca").onclick=()=>{
+  const c=norm($("cd").value),m=lot(c),a=abo();
+  if(!m){toast("Code invalide. Vérifie et réessaie.");return}
+  if(!(a&&a.code===c)&&!fenetre(m)){toast("Ce code est expiré. Demande un code du mois en cours.");return}
+  const s=(a&&a.code===c)?a.start:Date.now();
+  if(Date.now()>=s+CFG.jours*864e5){toast("Ce code a déjà été utilisé et son mois est terminé.");return}
+  ecrire("pp_abo",{code:c,start:s});etat();toast("Premium activé !");
+};
+$("jg").onclick=()=>{
+  const n=$("jn").value.trim(),t=$("jt").value.trim().toUpperCase().replace(/\s+/g,"");
+  if(n.length<3){toast("Écris ton nom complet");return}
+  if(!/^T_[A-Z0-9]{8,}$/.test(t)){toast("ID invalide : il est dans ton reçu Wave et commence par T_");return}
+  const msg="Bonjour, j'ai payé Parcours Projet CI Premium (1 000 F, mensuel).\nNom : "+n+"\nID de transaction Wave : "+t+"\nMerci de vérifier et de m'envoyer mon code.";
+  window.open("https://wa.me/"+CFG.wa+"?text="+encodeURIComponent(msg),"_blank","noopener");toast("WhatsApp ouvert : appuie sur envoyer");
+};
+$("inv").href="https://wa.me/?text="+encodeURIComponent("Teste Parcours Projet CI : un diagnostic gratuit pour avancer sur ton projet. "+location.href);
+
+/* ---- Navigation ---- */
+function aller(t){document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x.dataset.t===t));document.querySelectorAll(".sec").forEach(s=>s.classList.toggle("on",s.id==="t-"+t));scrollTo({top:0})}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  if(b.dataset.p&&!actif()){aller("prm");toast("🔒 Réservé au Premium mensuel (1 000 FCFA)");return}
+  aller(b.dataset.t);
+});
+
+/* ---- Diagnostic et parcours ---- */
+const STEPS=[
+{t:"1. Idée et diagnostic",d:"Savoir quel problème tu résous et pour qui.",c:["Écrire mon idée en une phrase","Décrire mon client idéal","Lister 3 problèmes réels que mon idée règle","Faire le diagnostic"]},
+{t:"2. Test de marché",d:"Vérifier que des gens veulent vraiment ton produit avant de dépenser.",c:["Parler à 10 clients potentiels","Noter ce qu'ils achètent déjà et à quel prix","Faire une première vente ou une précommande","Garder les retours par écrit"]},
+{t:"3. Modèle simple",d:"Savoir combien ça coûte, à quel prix vendre, et ce qu'il te reste.",c:["Chiffrer mes coûts de départ","Fixer mon prix de vente","Calculer ma marge et mon seuil (onglet Outils)","Prévoir 3 mois de trésorerie"]},
+{t:"4. Formalisation",d:"Mettre ton activité en règle.",c:["Me renseigner sur le statut adapté (CEPICI)","Rassembler mes pièces","Faire les démarches d'immatriculation","Séparer l'argent du projet de mon argent personnel"]},
+{t:"5. Financement",d:"Préparer un dossier solide avant de demander.",c:["Lister les dispositifs possibles (onglet Aides)","Préparer : idée, marché, chiffres, équipe","Faire relire mon dossier par une personne expérimentée","Déposer ma demande auprès d'organismes officiels"]},
+{t:"6. Lancement et suivi",d:"Avancer chaque semaine et corriger.",c:["Fixer 3 objectifs pour 3 mois","Noter mes ventes et dépenses chaque semaine","Parler chaque semaine à un mentor ou à un pair","Ajuster selon les résultats"]}];
+const Q=[["Mon idée tient en une phrase claire.",0],["Je sais qui sera mon client.",0],["J'ai parlé à au moins 5 clients potentiels.",1],["Je connais mes coûts de départ, chiffrés.",2],["Je sais à quel prix je vends et ma marge.",2],["J'ai testé mon idée en petit (première vente).",1],["Je connais les démarches pour formaliser.",3],["Je connais au moins 2 aides ou financements.",4],["J'en parle chaque semaine avec quelqu'un.",5],["J'ai un plan pour mes 3 premiers mois.",5]];
+$("qs").innerHTML=Q.map((q,i)=>`<div class="q"><b>${i+1}. ${esc(q[0])}</b><div class="o">${[["2","Oui"],["1","En partie"],["0","Non"]].map(o=>`<label><input type="radio" name="q${i}" value="${o[0]}"><span>${o[1]}</span></label>`).join("")}</div></div>`).join("");
+$("dg").onclick=()=>{
+  let tot=0,man=[0,0,0,0,0,0];
+  for(let i=0;i<Q.length;i++){const v=document.querySelector(`input[name=q${i}]:checked`);if(!v){$("res").innerHTML='<div class="warn">Réponds aux 10 questions pour voir ton résultat.</div>';return}tot+=+v.value;man[Q[i][1]]+=2-v.value}
+  const n=tot<=7?["Idée à clarifier","Commence par les étapes 1 et 2 : précise ton idée et parle à de vrais clients."]:tot<=14?["Projet en construction","Concentre-toi sur les chiffres et la formalisation (étapes 3 et 4)."]:["Prêt à préparer le financement","Prépare ton dossier (étape 5) et fais-le relire avant de déposer."];
+  const top=man.map((m,i)=>[m,i]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,2).map(x=>STEPS[x[1]].t);
+  $("res").innerHTML=`<div class="warn"><b>${n[0]} : ${tot}/20</b><div class="bar"><i style="width:${tot*5}%"></i></div><p>${n[1]}</p>${top.length?`<p>À travailler en priorité : <b>${top.map(esc).join(" et ")}</b>.</p>`:""}<p class="m">Ce résultat est un repère, pas une garantie.</p></div>`;
+};
+function parcours(){
+  const S=lire("pp_steps",{});let f=0,t=0;
+  $("steps").innerHTML=STEPS.map((s,i)=>`<div class="c"><h2>${esc(s.t)}</h2><div class="m">${esc(s.d)}</div>${s.c.map((c,j)=>{t++;const on=!!S[i+"_"+j];if(on)f++;return`<label class="ck"><input type="checkbox" data-k="${i}_${j}" ${on?"checked":""}><span>${esc(c)}</span></label>`}).join("")}</div>`).join("");
+  $("pg").textContent=f+" tâche(s) faite(s) sur "+t;$("pb").style.width=Math.round(f/t*100)+"%";
+}
+$("steps").onchange=e=>{const k=e.target.dataset.k;if(!k)return;const S=lire("pp_steps",{});if(e.target.checked)S[k]=1;else delete S[k];ecrire("pp_steps",S);parcours()};
+parcours();
+$("calc").onclick=()=>{
+  const p=+$("px").value,c=+$("cu").value,f=+$("fx").value;
+  if(!(p>0)||c<0||f<0){$("cr").innerHTML='<div class="warn">Entre un prix de vente valide et des coûts positifs.</div>';return}
+  const m=p-c,t=Math.round(m/p*100),n=f>0&&m>0?Math.ceil(f/m):0;
+  $("cr").innerHTML=`<div class="warn"><div class="r"><span>Marge par unité</span><b>${fmt(m)} FCFA (${t} %)</b></div>${m<=0?"<p>Tu perds de l'argent à chaque vente : augmente le prix ou baisse le coût.</p>":f>0?`<div class="r"><span>Seuil de rentabilité</span><b>${fmt(n)} unités par mois</b></div>`:'<p class="m">Ajoute tes charges fixes pour voir ton seuil.</p>'}</div>`;
+};
+
+/* ---- Formations ---- */
+const FORMS=[
+{t:"1. Valider ton idée en 7 jours",s:["Jour 1 : écris en deux phrases le problème que tu résous et qui l'a.","Jour 2 : liste 10 personnes concernées à interroger.","Jours 3 et 4 : parle à 5 d'entre elles. Demande : comment font-elles aujourd'hui ? combien paient-elles ? qu'est-ce qui les gêne ?","Jour 5 : note les 3 réponses qui reviennent le plus.","Jour 6 : propose ton offre et ton prix à 3 personnes.","Jour 7 : décide : continuer, changer d'idée ou arrêter.","Règle : quelqu'un qui dit « c'est bien » mais ne paie pas n'est pas encore un client."]},
+{t:"2. Chiffrer ton projet",s:["Coûts de départ : matériel, stock, local, papiers, communication. Mets un montant à chaque ligne.","Coûts de chaque mois : loyer, transport, internet, salaires, remboursements.","Prix de vente = coût d'une unité + une marge qui te paie réellement.","Seuil de rentabilité : charges fixes divisées par la marge d'une unité (onglet Outils).","Garde de quoi tenir 3 mois sans ventes.","Erreur fréquente : oublier ton propre temps, ton transport et les pertes."]},
+{t:"3. Trouver tes 10 premiers clients",s:["Écris qui ils sont et où ils se trouvent (quartier, groupe WhatsApp, marché, école).","Prépare un message court : ce que tu fais, pour qui, à quel prix, comment commander.","Offre de lancement limitée dans le temps, sans casser ton prix.","Demande un avis écrit à chaque premier client : c'est ta preuve.","Note chaque contact dans un cahier : date, réponse, suite à donner."]},
+{t:"4. Préparer ton dossier de financement",s:["Résumé en 5 lignes : qui, quoi, pour qui, combien, pourquoi.","Problème, solution et preuve que des clients en veulent.","Chiffres : coûts, prix, marge, ventes attendues, prudentes.","Ton équipe et ce que chacun fait.","Combien tu demandes et à quoi servira exactement chaque franc.","Risques et comment tu les limites.","Fais relire par une personne expérimentée avant de déposer. Garde tes justificatifs."]},
+{t:"5. Présenter ton projet en 3 minutes",s:["Phrase 1 : le problème, avec un exemple vécu.","Phrase 2 : ta solution en des mots simples.","Phrase 3 : tes clients et la preuve (premiers clients, avis).","Phrase 4 : tes chiffres clés.","Phrase 5 : ce que tu demandes.","Entraîne-toi à voix haute, chronomètre-toi, et reste honnête sur ce que tu ne sais pas encore."]},
+{t:"6. Gérer ton argent et durer",s:["Sépare l'argent du projet de ton argent personnel.","Note chaque entrée et chaque dépense, chaque semaine.","Paie-toi un petit salaire fixe plutôt que de piocher dans la caisse.","Garde une réserve avant de dépenser pour grandir.","Rembourse tes engagements à temps : ta crédibilité compte pour les prochains financements.","N'embauche que quand la charge de travail et les ventes le justifient."]}];
+$("fl").innerHTML=FORMS.map(f=>`<details><summary>${esc(f.t)}</summary>${f.s.map(x=>`<p>• ${esc(x)}</p>`).join("")}</details>`).join("");
+
+/* ---- Dossier ---- */
+const DF=[["nom","Nom du projet"],["idee","Mon idée en une phrase"],["client","Mon client visé"],["pb","Le problème que je résous"],["offre","Mon offre"],["prix","Mon prix et ma marge"],["couts","Mes coûts de départ"],["besoin","Mon besoin de financement et son usage"],["plan","Mon plan des 3 premiers mois"]];
+const D=lire("pp_dossier",{});
+$("df").innerHTML=DF.map(f=>`<label class="m" for="d_${f[0]}">${esc(f[1])}</label><textarea id="d_${f[0]}" rows="2" data-d="${f[0]}">${esc(D[f[0]]||"")}</textarea>`).join("");
+$("df").oninput=e=>{const k=e.target.dataset.d;if(!k)return;D[k]=e.target.value;ecrire("pp_dossier",D)};
+const dTxt=()=>"DOSSIER DE PROJET\n\n"+DF.map(f=>f[1].toUpperCase()+" :\n"+(D[f[0]]||"Non renseigné")).join("\n\n");
+$("dcp").onclick=async()=>{try{await navigator.clipboard.writeText(dTxt());toast("Dossier copié")}catch(e){toast("Copie impossible ici")}};
+$("dim").onclick=()=>{const w=window.open("","_blank");if(!w){toast("Autorise les pop-up");return}w.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Dossier de projet</title><style>body{font-family:sans-serif;padding:32px;max-width:700px;margin:auto}pre{white-space:pre-wrap;font:15px/1.5 sans-serif}</style></head><body><pre>${esc(dTxt())}</pre><script>onload=()=>print()<\/script></body></html>`);w.document.close()};
+
+/* ---- Suivi ---- */
+function suivi(){
+  const L=lire("pp_suivi",[]);let v=0,d=0;L.forEach(x=>{v+=x.v;d+=x.d});
+  $("sh").innerHTML=L.length?`<div class="warn"><div class="r"><span>Total ventes</span><b>${fmt(v)} FCFA</b></div><div class="r"><span>Total dépenses</span><b>${fmt(d)} FCFA</b></div><div class="r"><span>Solde</span><b>${fmt(v-d)} FCFA</b></div></div>`+L.map(x=>`<div class="r"><span>${esc(x.s)}<br><span class="m">${esc(x.l||"")}</span></span><span>+${fmt(x.v)} / -${fmt(x.d)}</span></div>`).join(""):'<p class="m">Aucune semaine enregistrée.</p>';
+}
+$("ss").onclick=()=>{const v=+$("sv").value||0,d=+$("sd").value||0;if(v<0||d<0){toast("Montants positifs seulement");return}const L=lire("pp_suivi",[]);L.unshift({s:"Semaine du "+new Date().toLocaleDateString("fr-FR"),v,d,l:$("sl").value.trim()});ecrire("pp_suivi",L.slice(0,26));$("sv").value=$("sd").value=$("sl").value="";suivi();toast("Semaine enregistrée")};
+/* ---- Emploi ---- */
+const EC=["Mon CV tient sur 1 page et est à jour","Ma lettre de motivation est prête","Ma pièce d'identité et mes diplômes sont scannés ou photocopiés","Mon profil sur le site de l'AEJ est créé et à jour","J'ai ma carte AEJ (inscription en agence)","Je candidate à 5 offres par semaine","Je relance chaque candidature après 7 jours","Mon téléphone est chargé et j'ai une adresse e-mail sérieuse"];
+function emp(){const S=lire("pp_emp",{});$("ec").innerHTML=EC.map((c,i)=>`<label class="ck"><input type="checkbox" data-e="${i}" ${S[i]?"checked":""}><span>${esc(c)}</span></label>`).join("")}
+$("ec").onchange=e=>{const k=e.target.dataset.e;if(k===undefined)return;const S=lire("pp_emp",{});if(e.target.checked)S[k]=1;else delete S[k];ecrire("pp_emp",S)};
+emp();
+const CVF=[["nom","Nom et prénoms"],["tel","Téléphone"],["mail","E-mail"],["ville","Ville"],["titre","Poste visé"],["resume","Profil en 2 ou 3 phrases"],["exp","Expériences (une par ligne : poste, structure, période, ce que tu as fait)"],["form","Formations et diplômes (un par ligne)"],["comp","Compétences (séparées par des virgules)"],["lang","Langues"]];
+const CV=lire("pp_cv",{});
+$("cvf").innerHTML=CVF.map(f=>`<label class="m" for="cv_${f[0]}">${esc(f[1])}</label><${["resume","exp","form"].includes(f[0])?"textarea rows=3":"input"} id="cv_${f[0]}" data-cv="${f[0]}" value="${esc(CV[f[0]]||"")}">${["resume","exp","form"].includes(f[0])?esc(CV[f[0]]||"")+"</textarea>":""}`).join("");
+$("cvf").oninput=e=>{const k=e.target.dataset.cv;if(!k)return;CV[k]=e.target.value;ecrire("pp_cv",CV)};
+const cvTxt=()=>{const g=k=>(CV[k]||"").trim();const L=[g("nom").toUpperCase(),g("titre"),[g("tel"),g("mail"),g("ville")].filter(Boolean).join(" | "),""];
+ if(g("resume"))L.push("PROFIL",g("resume"),"");if(g("exp"))L.push("EXPÉRIENCES",...g("exp").split("\n").map(x=>"- "+x.trim()).filter(x=>x!=="- "),"");
+ if(g("form"))L.push("FORMATIONS",...g("form").split("\n").map(x=>"- "+x.trim()).filter(x=>x!=="- "),"");if(g("comp"))L.push("COMPÉTENCES",g("comp"),"");if(g("lang"))L.push("LANGUES",g("lang"));return L.join("\n").trim()};
+$("cvg").onclick=()=>{if(!(CV.nom||"").trim()){toast("Écris au moins ton nom");return}$("cvo").value=cvTxt()};
+$("cvc").onclick=async()=>{try{await navigator.clipboard.writeText($("cvo").value||cvTxt());toast("CV copié")}catch(e){toast("Copie impossible ici")}};
+$("cvp").onclick=()=>{const w=window.open("","_blank");if(!w){toast("Autorise les pop-up");return}w.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>CV</title><style>body{font-family:sans-serif;padding:32px;max-width:700px;margin:auto}pre{white-space:pre-wrap;font:15px/1.5 sans-serif}</style></head><body><pre>${esc($("cvo").value||cvTxt())}</pre><script>onload=()=>print()<\/script></body></html>`);w.document.close()};
+const LF=[["poste","Poste visé"],["org","Entreprise ou organisme"],["q1","Une qualité (exemple : sérieux)"],["q2","Une autre qualité (exemple : ponctuel)"],["fait","Une chose concrète que tu as réalisée"]];
+$("lf").innerHTML=LF.map(f=>`<input id="l_${f[0]}" placeholder="${esc(f[1])}">`).join("");
+$("lg").onclick=()=>{const v=k=>$("l_"+k).value.trim();if(!v("poste")||!v("org")){toast("Écris le poste et l'entreprise");return}
+ $("lo").value=`Madame, Monsieur,\n\nJe vous écris pour poser ma candidature au poste suivant : ${v("poste")}, au sein de ${v("org")}.\n\nMotivé, voici mes qualités : ${[v("q1"),v("q2")].filter(Boolean).join(" et ")||"mon engagement"}. ${v("fait")?"Par exemple, "+v("fait")+".":""}\n\nJe suis disponible pour un entretien à votre convenance et je vous remercie de l'attention portée à ma candidature.\n\nCordialement,\n${(CV.nom||"").trim()}\n${(CV.tel||"").trim()}`};
+$("lc").onclick=async()=>{try{await navigator.clipboard.writeText($("lo").value);toast("Lettre copiée")}catch(e){toast("Copie impossible ici")}};
+const ST=["Envoyée","Relancée","Entretien","Refus","Offre reçue"];
+function cands(){const L=lire("pp_cand",[]);const n=k=>L.filter(x=>x.s===k).length;
+ $("cl").innerHTML=L.length?`<div class="warn">${L.length} candidature(s) · ${n("Entretien")} entretien(s) · ${n("Offre reçue")} offre(s)</div>`+L.map((x,i)=>`<div class="r"><span><b>${esc(x.p)}</b><br><span class="m">${esc(x.e)} · ${esc(x.d)}</span></span><select data-c="${i}" style="width:auto;margin:0">${ST.map(t=>`<option ${t===x.s?"selected":""}>${t}</option>`).join("")}</select></div>`).join(""):'<p class="m">Aucune candidature enregistrée.</p>'}
+$("ca2").onclick=()=>{const e=$("ce").value.trim(),p=$("cp").value.trim();if(!e||!p){toast("Écris l'entreprise et le poste");return}const L=lire("pp_cand",[]);L.unshift({e,p,s:"Envoyée",d:new Date().toLocaleDateString("fr-FR")});ecrire("pp_cand",L.slice(0,100));$("ce").value=$("cp").value="";cands();toast("Candidature ajoutée")};
+$("cl").onchange=e=>{const i=e.target.dataset.c;if(i===undefined)return;const L=lire("pp_cand",[]);L[i].s=e.target.value;ecrire("pp_cand",L);cands()};
+cands();
+const QE=[["Présentez-vous.","Une minute : qui tu es, ta formation, ce que tu sais faire, pourquoi ce poste."],["Pourquoi ce poste et cette entreprise ?","Montre que tu connais l'entreprise et relie-la à ce que tu sais faire."],["Quelles sont vos qualités et vos défauts ?","Donne 2 qualités avec un exemple vrai, et un défaut réel avec ce que tu fais pour le corriger."],["Parlez d'une difficulté que vous avez surmontée.","Situation, ce que tu as fait, résultat. Reste simple et honnête."],["Pourquoi vous plutôt qu'un autre ?","Ce que tu apportes de concret : sérieux, disponibilité, compétences, envie d'apprendre."],["Quelles sont vos prétentions salariales ?","Informe-toi avant sur les salaires du poste. Donne une fourchette raisonnable et reste ouvert."],["Où vous voyez-vous dans 3 ans ?","Parle d'apprendre, de progresser dans le métier et d'être utile à l'entreprise."],["Avez-vous des questions ?","Prépare 2 questions : les missions au quotidien, la formation, la suite après la période d'essai."]];
+$("qe").innerHTML=QE.map(q=>`<details><summary>${esc(q[0])}</summary><p>${esc(q[1])}</p></details>`).join("");
+$("qn").value=lire("pp_notes","");$("qn").oninput=()=>ecrire("pp_notes",$("qn").value);
+/* ---- Deux parcours ---- */
+let MODE=lire("pp_mode","p");
+function mode(g){MODE=g;ecrire("pp_mode",g);$("mP").className=g==="p"?"sel":"g";$("mE").className=g==="e"?"sel":"g";
+ document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("nv",!!b.dataset.g&&b.dataset.g!==g));
+ const cur=document.querySelector(".sec.on").id.slice(2),ok=[...document.querySelectorAll("nav button")].some(b=>b.dataset.t===cur&&!b.classList.contains("nv"));
+ if(!ok)aller(g==="p"?"acc":"emp")}
+$("mP").onclick=()=>mode("p");$("mE").onclick=()=>mode("e");
+suivi();etat();mode(MODE);
+</script>
+</body>
+</html>
